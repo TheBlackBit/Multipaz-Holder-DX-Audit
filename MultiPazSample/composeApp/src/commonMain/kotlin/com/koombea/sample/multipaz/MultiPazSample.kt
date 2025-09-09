@@ -30,7 +30,6 @@ import org.multipaz.crypto.EcCurve
 import org.multipaz.crypto.X500Name
 import org.multipaz.crypto.X509CertChain
 import org.multipaz.document.buildDocumentStore
-import org.multipaz.documenttype.DocumentTypeRepository
 import org.multipaz.documenttype.knowntypes.DrivingLicense
 import org.multipaz.mdoc.connectionmethod.MdocConnectionMethodBle
 import org.multipaz.mdoc.engagement.EngagementGenerator
@@ -43,6 +42,7 @@ import org.multipaz.util.toBase64Url
 import kotlin.time.Clock
 import kotlin.time.Duration.Companion.days
 import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
 
 
 @OptIn(ExperimentalTime::class)
@@ -88,9 +88,6 @@ fun MultiPazSample() {
 private suspend fun initializeDocumentStore(): org.multipaz.document.DocumentStore {
     val storage = Platform.nonBackedUpStorage
     val secureArea = Platform.getSecureArea()
-    val docTypes = DocumentTypeRepository().apply {
-        addDocumentType(DrivingLicense.getDocumentType())
-    }
     return buildDocumentStore(
         storage,
         SecureAreaRepository.Builder().add(secureArea).build()
@@ -125,7 +122,7 @@ private suspend fun createSampleDocumentIfNeeded(store: org.multipaz.document.Do
 @OptIn(ExperimentalTime::class)
 private fun createCertificateChain(
     dsKey: org.multipaz.crypto.EcPrivateKey,
-    now: kotlinx.datetime.Instant
+    now: Instant
 ): X509CertChain {
     return X509CertChain(
         listOf(
