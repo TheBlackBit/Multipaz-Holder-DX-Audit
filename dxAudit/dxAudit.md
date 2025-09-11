@@ -1,7 +1,7 @@
-### Friction 1: References to other libraries within the Multipaz ecosystem are missing
-- **Link**: [Installation](https://developer.multipaz.org/docs/getting-started/installation)
-- **Impact**: Low — If someone wants to check it out other libraries needs to leave the documentation.
-- **Proposed Fix**: Add the links for other Multipaz libraries
+### Friction 1: Mixed Platform Instructions Without Clear Separation (Android Studio vs Xcode) 
+- **Link**: [Installation](https://developer.multipaz.org/docs/getting-started/installation/#%EF%B8%8F-some-gotchas-to-be-aware-of-ios-only)
+- **Impact**: Meidum — The guide mixes Kotlin code with Xcode project settings without clearly separating them.
+- **Proposed Fix**: Add clear headings like “Update Kotlin Code” and “Update Xcode Project Settings” so readers know exactly where each change applies.
 
 ### Friction 2: Pending implementations
 - **Link**: [Issuer](https://developer.multipaz.org/docs/getting-started/issuer)
