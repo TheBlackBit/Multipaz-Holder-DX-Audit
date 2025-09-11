@@ -51,10 +51,12 @@ fun MultiPazSample() {
     val scope = rememberCoroutineScope()
     val qrPayload = remember { mutableStateOf<ByteString?>(null) }
 
-    LaunchedEffect(Unit) {
-        val store = initializeDocumentStore()
-        createSampleDocumentIfNeeded(store)
-        qrPayload.value = generateQrPayload()
+    LaunchedEffect(qrPayload.value) {
+        if (qrPayload.value == null) {
+            val store = initializeDocumentStore()
+            createSampleDocumentIfNeeded(store)
+            qrPayload.value = generateQrPayload()
+        }
     }
 
     Column(
